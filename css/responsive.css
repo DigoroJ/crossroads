@@ -55,11 +55,12 @@
 }
 
 /* sm */
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 768px) {
 
   .navbar-brand {
     width: 215px;
     height: 60px;
+   background-color: #fff;
   }
 
   .navbar-right {
