@@ -6,14 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "name": "Vision Casting",
             "department": "Church",
-            "date": new Date('02-09-2025'),
-            "time": ""
+            "date": new Date('02-09-2025 09:00'),
+            "time": "09:00"
         },
         {
             "name": "Worship seminar",
             "department": "Worship team",
-            "date": new Date('03-22-2025'),
-            "time": ""
+            "date": new Date('03-22-2025 09:00'),
+            "time": "09:00"
         },
         {
             "name": "Brothers breakfast",
@@ -66,8 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "name": "Stay awake",
             "department": "Worship Team",
-            "date": new Date('07-12-2025'),
-            "time": ""
+            "date": new Date('07-12-2025 22:00'),
+            "time": "22:00"
         },
         {
             "name": "All day @ Church",
@@ -78,8 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "name": "Concert",
             "department": "Worship Team",
-            "date": new Date('09-06-2025'),
-            "time": ""
+            "date": new Date('09-06-2025 18:00'),
+            "time": "18:00"
         },
         {
             "name": "Combined Service with Youth",
@@ -133,30 +133,30 @@ document.addEventListener('DOMContentLoaded', () => {
     ]
     var nextEvent = {}
     var nextEvents = []
-
-    month = now.getMonth()+1
-    if (month < 10) {
-        month = "0" + month
-    }
-    today = now.getDate() + "-" + month + "-" + now.getFullYear() 
-    today = new Date(today)
-
-
     for (const event of events) {
         if (event.date > now) {
             nextEvents.push(event)  
         }
     }
     nextEvent = nextEvents[0];
+    console.log('Events', events );
 
+    var minutes = 60 - now.getMinutes() + nextEvent.date.getMinutes()
+    var min = nextEvent.date - now
+    min = Math.ceil(min / 60000) 
+    newHr = Math.floor(min/60)
+    diffDays = Math.floor(newHr / 24)
+    hours = (newHr % 24 -1 )
+    if (minutes => 60) {
+        minutes = minutes % 60
+        hours += 1
+    }
+    if (hours => 24) {
+        hours = hours % 24
+        diffDays += 1
+    }
 
-    var diffDays = Math.floor((nextEvent.date - now) / (1000 * 60 * 60 * 24));
-    var hours = 23 - now.getHours()
-    var minutes = 60 - now.getMinutes()
-
-
-    //document.getElementById("days")[1].innerHTML = diffDays
-    //
+    //Count down
     document.getElementById('days').innerText = diffDays;
     document.getElementById('hours').innerText = hours;
     document.getElementById('mins').innerText = minutes;
@@ -164,9 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var eventName = nextEvent.name
     var eventDate = String(nextEvent.date).substring(0,15)
 
-   // console.log("event", eventDate.substring(0,15));
-    
-
+    //Next event
     document.getElementById('eventName').innerText = eventName;
     document.getElementById('eventDate').innerText = eventDate;
 
@@ -175,7 +173,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('eventName2').innerText = eventName;
     document.getElementById('eventDate2').innerText = eventDate;
-
-
     
   });
