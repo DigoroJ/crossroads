@@ -18,19 +18,25 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "name": "Brothers breakfast",
             "department": "Mens Fellowship",
-            "date": new Date('04-05-2025'),
-            "time": ""
+            "date": new Date('04-05-2025 09:00'),
+            "time": "09:00"
         },
         {
             "name": "Recovery And Restoration Service",
             "department": "Evangelism",
-            "date": new Date('04-06-2025'),
-            "time": ""
+            "date": new Date('04-06-2025 09:30'),
+            "time": "09:30"
         },
         {
             "name": "Good Friday Celebration",
             "department": "Church",
-            "date": new Date('04-18-2025'),
+            "date": new Date('04-18-2025 09:00'),
+            "time": "09:00"
+        },
+        {
+            "name": "Youth Service",
+            "department": "Youth",
+            "date": new Date('04-19-2025 09:00'),
             "time": "09:00"
         },
         {
@@ -48,20 +54,20 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "name": "Roosterbrood & Braai vleis",
             "department": " Womens ministry",
-            "date": new Date('05-04-2025'),
-            "time": ""
+            "date": new Date('05-04-2025 09:30'),
+            "time": "09:30"
         },
         {
-            "name": "Pamphet Drive & Open Air",
+            "name": "Pamphlet Drive & Open Air",
             "department": "Evangelism",
-            "date": new Date('06-07-2025'),
-            "time": ""
+            "date": new Date('06-07-2025 09:00'),
+            "time": "09:00"
         },
         {
             "name": "Coffee Bar",
             "department": "Youth Fellowship",
-            "date": new Date('07-05-2025'),
-            "time": ""
+            "date": new Date('07-05-2025 09:00'),
+            "time": "09:00"
         },
         {
             "name": "Stay awake",
@@ -84,8 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "name": "Combined Service with Youth",
             "department": "Evangelism",
-            "date": new Date('09-12-2025'),
-            "time": ""
+            "date": new Date('09-12-2025 17:00'),
+            "time": "17:00"
         },
         {
             "name": "Prayer day - Come pray for your family",
@@ -96,26 +102,26 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "name": "Heritage day Celebration",
             "department": "Church",
-            "date": new Date('09-24-2025'),
-            "time": ""
+            "date": new Date('09-24-2025 09:00'),
+            "time": "09:00"
         },
         {
             "name": "Breast Cancer Awareness",
             "department": "Womens Ministry",
-            "date": new Date('10-18-2025'),
-            "time": ""
+            "date": new Date('10-18-2025 09:00'),
+            "time": "09:00"
         },
         {
             "name": "Banquet",
             "department": "Church",
-            "date": new Date('11-08-2025'),
-            "time": ""
+            "date": new Date('11-08-2025 16:00'),
+            "time": "16:00"
         },
         {
             "name": "Carols By Candle Light",
             "department": "Church",
-            "date": new Date('12-14-2025'),
-            "time": ""
+            "date": new Date('12-14-2025 09:30'),
+            "time": "09:30"
         }
         // ,
         // {
