@@ -1,73 +1,93 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    const now = new Date();
+    /* =========================
+       📅 EVENTS (GROUPED)
+    ========================= */
+    const groupedEvents = [
+        // =========================
+  // DECEMBER 2025
+  // =========================
+  {
+    date: new Date(2025, 11, 25),
+    events: [
+      {
+        name: "Christmas Service",
+        department: "Church",
+        date: new Date(2025, 11, 25, 9, 0)
+      }
+    ]
+  },
+  {
+    date: new Date(2025, 11, 31),
+    events: [
+      {
+        name: "Year End Service",
+        department: "Church",
+        date: new Date(2025, 11, 31, 22, 0)
+      }
+    ]
+  },
   
-    // 🔒 Cross-browser safe dates (NO string parsing)
-    const events = [
-      { name: "Vision Casting", department: "Church", date: new Date(2025, 1, 9, 15, 0) },
-      { name: "Worship seminar", department: "Worship team", date: new Date(2025, 2, 22, 9, 0) },
-      { name: "Brothers breakfast", department: "Mens Fellowship", date: new Date(2025, 3, 5, 0, 0) },
-      { name: "Recovery And Restoration Service", department: "Evangelism", date: new Date(2025, 3, 6, 0, 0) },
-      { name: "Good Friday Celebration", department: "Church", date: new Date(2025, 3, 18, 9, 0) },
-      { name: "Easter Sunday", department: "Church", date: new Date(2025, 3, 20, 9, 0) },
-      { name: "Marriage Counselling Seminar", department: "Intercessors", date: new Date(2025, 3, 26, 9, 0) },
-      { name: "Roosterbrood & Braai vleis", department: "Womens ministry", date: new Date(2025, 4, 4, 0, 0) },
-      { name: "Pamphet Drive & Open Air", department: "Evangelism", date: new Date(2025, 5, 7, 0, 0) },
-      { name: "Coffee Bar", department: "Youth Fellowship", date: new Date(2025, 6, 5, 0, 0) },
-      { name: "Stay awake", department: "Worship Team", date: new Date(2025, 6, 12, 22, 0) },
-      { name: "All day @ Church", department: "Intercessors", date: new Date(2025, 6, 26, 9, 0) },
-      { name: "Concert", department: "Worship Team", date: new Date(2025, 8, 6, 18, 0) },
-      { name: "Combined Service with Youth", department: "Evangelism", date: new Date(2025, 8, 12, 0, 0) },
-      { name: "Prayer day - Come pray for your family", department: "Intercessors", date: new Date(2025, 8, 20, 9, 0) },
-      { name: "Heritage day Celebration", department: "Church", date: new Date(2025, 8, 24, 0, 0) },
-      { name: "Breast Cancer Awareness", department: "Womens Ministry", date: new Date(2025, 9, 18, 0, 0) },
-      { name: "Banquet", department: "Church", date: new Date(2025, 10, 8, 0, 0) },
-      { name: "Carols By Candle Light", department: "Church", date: new Date(2025, 11, 14, 0, 0) },
-      { name: "Christmas Service", department: "Church", date: new Date(2025, 11, 25, 9, 0) },
-      { name: "Year End Service", department: "Church", date: new Date(2025, 11, 31, 22, 0) }
-    ];
+      // Daniel Fast – Day 1 to 26 (06:00)
+      ...Array.from({ length: 26 }, (_, i) => ({
+        date: new Date(2026, 0, 5 + i),
+        events: [{
+          name: `Fasting Day ${i + 1}`,
+          department: "Church",
+          date: new Date(2026, 0, 5 + i, 6, 0)
+        }]
+      })),
   
-    // 🔎 Get next upcoming event
-    const nextEvent = events
-      .filter(e => e.date > now)
-      .sort((a, b) => a.date - b.date)[0];
+      // Men's Conference – Day 1 to 4 (09:00)
+      ...Array.from({ length: 4 }, (_, i) => ({
+        date: new Date(2026, 0, 13 + i),
+        events: [{
+          name: `Men’s Conference – Day ${i + 1}`,
+          department: "Men’s Fellowship",
+          date: new Date(2026, 0, 13 + i, 9, 0)
+        }]
+      })),
   
-    if (!nextEvent) return;
+      {
+        date: new Date(2026, 1, 1),
+        events: [{
+          name: "Brothers Breakfast",
+          department: "Men’s Fellowship",
+          date: new Date(2026, 1, 1, 9, 0)
+        }]
+      },
   
-    // ⏳ Countdown function (WITH SECONDS)
-    function updateCountdown() {
-      const current = new Date();
-      let diff = nextEvent.date - current;
-  
-      if (diff <= 0) {
-        document.getElementById("days").textContent = 0;
-        document.getElementById("hours").textContent = 0;
-        document.getElementById("mins").textContent = 0;
-        document.getElementById("secs").textContent = 0;
-        return;
+      {
+        date: new Date(2026, 11, 25),
+        events: [{
+          name: "Christmas Service",
+          department: "Church",
+          date: new Date(2026, 11, 25, 9, 0)
+        }]
       }
   
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      diff %= (1000 * 60 * 60 * 24);
+    ];
   
-      const hours = Math.floor(diff / (1000 * 60 * 60));
-      diff %= (1000 * 60 * 60);
+    /* =========================
+       🔎 FLATTEN & FIND NEXT EVENT
+    ========================= */
+    const now = new Date();
   
-      const minutes = Math.floor(diff / (1000 * 60));
-      diff %= (1000 * 60);
+    const allEvents = groupedEvents
+      .flatMap(day => day.events)
+      .filter(e => e.date > now)
+      .sort((a, b) => a.date - b.date);
   
-      const seconds = Math.floor(diff / 1000);
+    if (!allEvents.length) return;
   
-      document.getElementById("days").textContent = days;
-      document.getElementById("hours").textContent = hours;
-      document.getElementById("mins").textContent = minutes;
-      document.getElementById("secs").textContent = seconds;
-    }
+    const nextEvent = allEvents[0];
   
-    // 🗓️ Display event name and date
+    /* =========================
+       🗓️ DISPLAY EVENT INFO
+    ========================= */
     function formatDate(date) {
       return date.toLocaleDateString("en-ZA", {
-        weekday: "short",
+        weekday: "long",
         year: "numeric",
         month: "short",
         day: "numeric",
@@ -76,16 +96,38 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   
-    document.getElementById("eventName").textContent = nextEvent.name;
-    document.getElementById("eventDate").textContent = formatDate(nextEvent.date);
+    ["", "1", "2"].forEach(suffix => {
+      const nameEl = document.getElementById(`eventName${suffix}`);
+      const dateEl = document.getElementById(`eventDate${suffix}`);
   
-    document.getElementById("eventName1").textContent = nextEvent.name;
-    document.getElementById("eventDate1").textContent = formatDate(nextEvent.date);
+      if (nameEl) nameEl.textContent = nextEvent.name;
+      if (dateEl) dateEl.textContent = formatDate(nextEvent.date);
+    });
   
-    document.getElementById("eventName2").textContent = nextEvent.name;
-    document.getElementById("eventDate2").textContent = formatDate(nextEvent.date);
+    /* =========================
+       ⏳ COUNTDOWN (D/H/M/S)
+    ========================= */
+    function updateCountdown() {
+      const now = new Date();
+      let diff = nextEvent.date - now;
   
-    // ⏱️ Initial call + update every second
+      if (diff <= 0) diff = 0;
+  
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      diff %= (1000 * 60 * 60 * 24);
+  
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      diff %= (1000 * 60 * 60);
+  
+      const minutes = Math.floor(diff / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+  
+      document.getElementById("days").textContent = String(days).padStart(2, "0");
+      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+      document.getElementById("mins").textContent = String(minutes).padStart(2, "0");
+      document.getElementById("secs").textContent = String(seconds).padStart(2, "0");
+    }
+  
     updateCountdown();
     setInterval(updateCountdown, 1000);
   
